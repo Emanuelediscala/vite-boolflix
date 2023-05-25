@@ -1,17 +1,42 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
+<script>
+import AppHeader from "./components/AppHeader.vue"
+import AppContent from "./components/AppContent.vue"
+import AppFooter from "./components/AppFooter.vue"
+import { moviesList } from "../src/data/store.js"
+import axios from 'axios';
+
+export default {
+  components: {
+    AppHeader,
+    AppContent,
+    AppFooter,
+  },
+  data() {
+    return {
+      moviesList
+    }
+  },
+  methods: {
+    moviesLoaded(adress) {
+      axios.get(adress).then((response => {
+        this.moviesList.movies = response.data;
+        console.log(this.moviesList.movies);
+      }))
+    }
+  },
+  mounted() {
+    console.log("CIAO")
+    this.moviesLoaded(this.moviesList.apiUrl)
+    console.log("lista api",this.moviesList.movies);
+  }
+}
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  
+  <AppHeader/>
+  <AppContent/>
+  <AppFooter/>
 </template>
 
 <style lang="scss" scoped>
