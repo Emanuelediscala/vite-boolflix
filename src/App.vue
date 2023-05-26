@@ -4,6 +4,7 @@ import AppContent from "./components/AppContent.vue"
 import AppFooter from "./components/AppFooter.vue"
 import { moviesList } from "../src/data/store.js"
 import axios from 'axios';
+import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 export default {
   components: {
@@ -24,11 +25,16 @@ export default {
         console.log(this.moviesList.movies);
       }))
     },
-  },
+    SeriesLoaded(adress){ 
+      axios.get(adress).then((response => {
+        this.moviesList.series = response.data.results;
+        console.log(this.moviesList.series);
+      }))
+    }
+    },
   mounted() {
-    console.log("CIAO")
-    this.moviesLoaded(this.moviesList.apiUrl)
-    console.log("lista api", this.moviesList.movies);
+    this.moviesLoaded(this.moviesList.apiUrl+"a")
+    this.SeriesLoaded(this.moviesList.apiUrlSeries)
   }
 }
 </script>
@@ -36,7 +42,6 @@ export default {
 <template>
   <AppHeader />
   <AppContent />
-
 </template>
 
 <style lang="scss" scoped>
