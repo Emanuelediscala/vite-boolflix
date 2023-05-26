@@ -14,7 +14,7 @@ export default {
   data() {
     return {
       moviesList,
-      searchFilm: "",
+      
     }
   },
   methods: {
@@ -24,17 +24,6 @@ export default {
         console.log(this.moviesList.movies);
       }))
     },
-    // searchmovie() {
-    //   let indirizzo = this.moviesList.movies + this.searchFilm
-    //   this.moviesLoaded(indirizzo)
-    // }
-  },
-  computed: {
-    searching() {
-      return this.moviesList.movies.filter((card) => {
-        return card.title.toLowerCase().startsWith(this.searchFilm)
-      })
-    }
   },
   mounted() {
     console.log("CIAO")
@@ -45,14 +34,9 @@ export default {
 </script>
 
 <template>
-  <div class="d-flex gap-1 p-3" v-for="card in searching">
-    <p class="text-bg-secondary">{{ card.original_title }}</p>
-    <p class="text-bg-danger">{{ card.title }}</p>
-    <p class="text-bg-primary">{{ card.original_language }}</p>
-    <p class="text-bg-success">{{ card.vote_average }}</p>
-  </div>
-  <input @keyup.enter="searchmovie" v-model="searchFilm" class="form-control" type="search" placeholder="&#128269; Search "
-    aria-label="Search">
+  <AppHeader />
+  <AppContent />
+
 </template>
 
 <style lang="scss" scoped>
