@@ -34,11 +34,13 @@ export default {
                 <img :src="moviesList.imgFilm + film.backdrop_path" alt="Img Not Found">
                 <p class="text-center mt-3">PRODUCTION: <span>{{ film.original_title }}</span></p>
                 <p>TITLE: <span>{{ film.title }}</span></p>
-                <p>VOTE: <span>{{ getStarValue(film.vote_average) }}</span></p>
-                <span :class="getFlag(film.original_language)"></span>
+                <p class="d-inline-block">VOTE:</p>
                 <template class="d-flex" v-for="index in getStarValue(film.vote_average)" :key="index"   >
                     <i class="fa-solid fa-star"></i>
                 </template>
+                <template class="d-flex justify-content-center">
+                <p class="d-block text-center" :class="getFlag(film.original_language)"></p> 
+                </template> 
             </div>
             <div class="p-5 widCalc text-center" v-for="serie in this.moviesList.series">
                 <img :src="moviesList.imgFilm + serie.backdrop_path" alt="Img Not Found">
