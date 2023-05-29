@@ -33,7 +33,7 @@ export default {
 
 <template>
     <header>
-        <div class="d-flex p-5 gap-4 w-50 m-auto">
+        <div class="d-flex p-2 gap-4 w-50 m-auto">
             <h3>BoolFlix</h3>
             <input @keyup.enter="searchmovie" v-model="searchFilm" type="search" placeholder="&#128269; Search "
                 aria-label="Search">

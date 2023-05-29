@@ -8,7 +8,7 @@ export default {
         return {
             moviesList,
             flags,
-
+            stella: 5
         }
     },
     methods: {
@@ -17,15 +17,12 @@ export default {
         },
         getStarValue(oggetto) {
             return Math.floor(oggetto / 2)
-            for (let index = 1; index < oggetto; index++) {
-            }
         },
         getImg(oggetto) {
             if (oggetto.backdrop_path === null) {
                 return "../src/assets/placeholder-image.png"
             }
             else {
-
                 return this.moviesList.imgFilm + oggetto.backdrop_path
             }
         }
@@ -35,41 +32,57 @@ export default {
 <template>
     <main>
         <!-- CARD MOVIES -->
-        <div class=" container d-flex flex-wrap">
-            <div class="generalCards p-5 widCalc   position-relative overflow-x-auto"
+        <h1 class="text-center my-3">LISTA FILM</h1><h2 class="text-center">Trovati {{ this.moviesList.movies.length }}</h2>
+        <div class=" container gap-1 p-5 d-flex flex-wrap">
+            <div class="generalCards widCalc position-relative  "
                 v-for="(film, i) in this.moviesList.movies" @click=getStarValue()>
                 <img id="poster" :src="getImg(film)" class="img-fluid" alt="Img Not Found">
-                <div class="datiCards   position-absolute p-5 ">
-                    <p class="text-white text-center m-2">PRODUCTION: <span>{{ film.original_title.toUpperCase() }}</span></p>
-                    <p class="text-white text-center m-2">TITLE: <span>{{ film.title.toUpperCase() }}</span></p>
-                    <div class="d-flex justify-content-center   gap-1">
-                        <p class=" text-white text-center ">VOTE:</p>
-                        <template class="d-flex" v-for="index in getStarValue(film.vote_average)" :key="index">
-                            <i class="text-white fa-solid fa-star"></i>
+                <div class="datiCards position-absolute p-4 ">
+                    <p class="text-white">PRODUCTION: <span>{{ film.original_title.toUpperCase() }}</span>
+                    </p>
+                    <p class="text-white">TITLE: <span>{{ film.title.toUpperCase() }}</span></p>
+                    <div class="d-flex gap-1">
+                        <p class="text-white">VOTE:</p>
+                        <template v-for="cont in stella">
+                            <template v-if="getStarValue(film.vote_average) >= cont">
+                                <i class="text-warning fa-solid fa-star"></i>
+                            </template>
+                            <template v-else>
+                                <i class="text-black fa-solid fa-star"></i>
+                            </template>
                         </template>
                     </div>
-                    <template class="d-flex justify-content-center mb-1">
-                        <p class="d-block " :class="getFlag(film.original_language)"></p>
+                    <p class="text-white">{{ film.overview }}</p>
+                    <template class="d-flex justify-content-center">
+                        <p class="d-block mt-2" :class="getFlag(film.original_language)"></p>
                     </template>
                 </div>
             </div>
+        </div>
+        <h1 class="text-center mb-3">LISTA SERIES</h1><h2 class="text-center">Trovati {{ this.moviesList.series.length }}</h2>
+        <div class=" container gap-1 p-5 d-flex flex-wrap">
             <!-- SERIES MOVIES -->
-            <div class="p-5 widCalc generalCards text-center position-relative overflow-x-auto"
-                v-for="serie in this.moviesList.series">
+            <div class=" widCalc generalCards  position-relative overflow-x-auto" v-for="serie in this.moviesList.series">
                 <img id="poster" :src="getImg(serie)" class="img-fluid" alt="Img Not Found">
-                <div class="datiCards position-absolute p-5 ">
-                        <p class="text-white text-center m-2">PRODUCTION: <span>{{ serie.name.toUpperCase() }}</span></p>
-                        <p class="text-white  text-center m-2">TITLE: <span>{{ serie.original_name.toUpperCase() }}</span></p>
-                        <div class="d-flex justify-content-center gap-1">
-                            <p class="text-white">VOTE:</p>
-                            <template class="d-flex" v-for="index in getStarValue(serie.vote_average)" :key="index">
-                                <i class="text-white fa-solid fa-star"></i>
+                <div class="datiCards position-absolute p-4">
+                    <p class="text-white">PRODUCTION: <span>{{ serie.name.toUpperCase() }}</span></p>
+                    <p class="text-white">TITLE: <span>{{ serie.original_name.toUpperCase() }}</span></p>
+                    <div class="d-flex  gap-1">
+                        <p class="text-white">VOTE:</p>
+                        <template v-for="index in stella">
+                            <template v-if="getStarValue(serie.vote_average) >= index">
+                                <i class="text-warning fa-solid fa-star"></i>
                             </template>
-                        </div>
-                        <template class="d-flex justify-content-center mb-1">
-                            <p class="d-block text-center" :class="getFlag(serie.original_language)"></p>
+                            <template v-else>
+                                <i class="text-black fa-solid fa-star"></i> 
+                            </template>
                         </template>
                     </div>
+                    <p class="text-white">{{ serie.overview }}</p>
+                    <template class="d-flex justify-content-center">
+                        <p class="d-block  mt-2" :class="getFlag(serie.original_language)"></p>
+                    </template>
+                </div>
             </div>
         </div>
     </main>
@@ -77,7 +90,11 @@ export default {
 
 <style lang="scss">
 .widCalc {
-    width: calc(100% / 3);
+    width: calc(100% / 3 - 0.50rem);
+}
+
+.generalCards {
+    height: 191px;
 }
 
 .datiCards {
@@ -85,25 +102,25 @@ export default {
     bottom: 0px;
     z-index: -10;
     width: 100%;
-    height: 100%;
-
+    height: 191px;
+    overflow-y: auto;
 }
-
-
 .generalCards:hover {
     img {
         opacity: 0.5;
     }
+
     .datiCards {
-    z-index: 10;
+        z-index: 10;
 
     }
 }
+
 .width100 {
     width: 400px;
 }
+
 p {
-    text-align: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: 700;
     font-size: 10px;
@@ -114,6 +131,5 @@ span {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 10px;
     font-weight: 700;
-
 }
 </style>
