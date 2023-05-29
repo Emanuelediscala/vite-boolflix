@@ -32,7 +32,7 @@ export default {
 <template>
     <main>
         <!-- CARD MOVIES -->
-        <h1 class="text-center my-3">LISTA FILM</h1><h2 class="text-center">Trovati {{ this.moviesList.movies.length }}</h2>
+        <h1 class="text-center text-white my-3">LISTA FILM</h1><h2 class="text-center text-white">Trovati {{ this.moviesList.movies.length }}</h2>
         <div class=" container gap-1 p-5 d-flex flex-wrap">
             <div class="generalCards widCalc position-relative  "
                 v-for="(film, i) in this.moviesList.movies" @click=getStarValue()>
@@ -59,7 +59,7 @@ export default {
                 </div>
             </div>
         </div>
-        <h1 class="text-center mb-3">LISTA SERIES</h1><h2 class="text-center">Trovati {{ this.moviesList.series.length }}</h2>
+        <h1 class="text-center text-white mb-3">LISTA SERIES</h1><h2 class="text-center text-white">Trovati {{ this.moviesList.series.length }}</h2>
         <div class=" container gap-1 p-5 d-flex flex-wrap">
             <!-- SERIES MOVIES -->
             <div class=" widCalc generalCards  position-relative overflow-x-auto" v-for="serie in this.moviesList.series">

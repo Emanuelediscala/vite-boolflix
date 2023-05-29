@@ -43,7 +43,7 @@ export default {
 
 <style lang="scss">
 header {
-    background-color: black;
+    background-color: #353E40;
     color: red;
 }
 
