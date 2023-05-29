@@ -12,13 +12,13 @@ export default {
         moviesLoaded(adress) {
             axios.get(adress).then((response => {
                 this.moviesList.movies = response.data.results;
-                console.log(this.moviesList.movies);
+                
             }))
         },
         SeriesLoaded(adress) {
             axios.get(adress).then((response => {
                 this.moviesList.series = response.data.results;
-                console.log(this.moviesList.series);
+                
             }))
         },
         searchmovie() {

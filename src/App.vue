@@ -34,7 +34,7 @@ export default {
     },
   mounted() {
     this.moviesLoaded(this.moviesList.apiUrl+"a")
-    this.SeriesLoaded(this.moviesList.apiUrlSeries)
+    this.SeriesLoaded(this.moviesList.apiUrlSeries+"a")
   }
 }
 </script>
